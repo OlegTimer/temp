@@ -1,0 +1,668 @@
+/* 
+path c:\Program Files\Java\jdk-12.0.1\bin
+ cd c:\1
+ javac Solution.java
+java Solution  
+jar cmf manif.txt  Solution.jar *.class
+*/
+
+//    Создать две кнопки
+import java.lang.Math; 
+import java.awt.*; 
+import java.awt.event.*; 
+import javax.swing.*; 
+import java.util.*;
+ 
+public class  Solution  implements ActionListener  {
+JFrame jf;
+JButton button1; 
+JButton button2;
+JButton button3;
+JButton button4;
+JButton button5;
+JButton button6;
+JButton button7;
+JButton button8;
+JButton button9;
+JButton button0;
+
+Label label;
+static int c1;
+static int c2;
+static int c3;
+static int c4;
+static int c5;
+static int c6;
+static int c7;
+static int c8;
+static int c9;
+static int fw = 0;
+static  String s0 = "     ";
+static  String s = null;
+static  String s2 =null;
+
+Solution () //это конструктор
+{
+jf= new JFrame("Tic_tac_toe"); //создаем фрейм, где все будет
+jf.setResizable(false);
+jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //закр окно по крестику
+button1= new JButton("     "); //создаем кнопки и марку текста
+button2= new JButton("     ");
+button3= new JButton("     ");
+button4= new JButton("     ");
+button5= new JButton("     ");
+button6= new JButton("     ");
+button7= new JButton("     ");
+button8= new JButton("     ");
+button9= new JButton("     ");
+
+label = new Label();
+button0= new JButton("New");
+
+jf.add(button1); //добавляем кнопки и марку в фрейм
+jf.add(button2);
+jf.add(button3);
+jf.add(button4);
+jf.add(button5);
+jf.add(button6);
+jf.add(button7);
+jf.add(button8);
+jf.add(button9);
+
+jf.add(label);
+jf.add(button0);
+//Registering the class Solution to listen to ActionEvent, when buttons are clicked.
+
+button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button1.setEnabled(false);
+button1.setText("  x  ");
+  c1 = 1; an();}  });
+
+button2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button2.setText("  x  ");
+button2.setEnabled(false);
+  c2 = 1; an();}  });
+
+button3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button3.setText("  x  ");
+button3.setEnabled(false);
+  c3 = 1; an();}  });
+
+button4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button4.setText("  x  ");
+button4.setEnabled(false);
+  c4 = 1; an();}  });
+
+button5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button5.setText("  x  ");
+button5.setEnabled(false);
+  c5 = 1; an();}  });
+
+button6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button6.setText("  x  ");
+button6.setEnabled(false);
+  c6 = 1; an();}  });
+
+button7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button7.setText("  x  ");
+button7.setEnabled(false);
+  c7 = 1; an();}  });
+
+button8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button8.setText("  x  ");
+button8.setEnabled(false);
+  c8 = 1; an();}  });
+
+button9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button9.setText("  x  ");
+button9.setEnabled(false);
+  c9 = 1; an();}  });
+
+button0.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+button1.setEnabled(true);
+button2.setEnabled(true);
+button3.setEnabled(true);
+button4.setEnabled(true);
+button5.setEnabled(true);
+button6.setEnabled(true);
+button7.setEnabled(true);
+button8.setEnabled(true);
+button9.setEnabled(true);
+  c1 = 0;  c2 = 0;  c3 = 0;  c4 = 0;  c5 = 0;  c6 = 0;  c7 = 0;  c8 = 0;  c9 = 0;  fw = 0;
+button1.setText(s0);
+button2.setText(s0);
+button3.setText(s0);
+button4.setText(s0);
+button5.setText(s0);
+button6.setText(s0);
+button7.setText(s0);
+button8.setText(s0);
+button9.setText(s0);
+
+s2="X_go";
+label.setText(s2);
+jf.add(label);
+jf.setVisible(true);
+
+}  });
+
+
+jf.setLayout(new FlowLayout(FlowLayout.CENTER,1,1)); //центр, расстояние слева, высота
+jf.setSize(195,250);//размер фрейма
+
+s="X_go";
+label.setText(s);
+jf.add(label);
+
+jf.setVisible(true); //видимость
+}
+
+public void an() {
+/* 
+s2=String.valueOf(c1)+"_"+String.valueOf(c2)+"_"+String.valueOf(c3)+"_"+String.valueOf(c4)+"_"+String.valueOf(c5)+"_"
++String.valueOf(c6)+"_"+String.valueOf(c7)+"_"+String.valueOf(c8)+"_"+String.valueOf(c9);
+label.setText(s2);
+jf.add(label);
+jf.setVisible(true);
+ */
+
+if (c5==1 && c1==0&& c3==0&& c7==0&& c9==0&&fw==0)
+{
+double rand = Math.random();
+if (rand <0.3){
+button1.setEnabled(false);
+button1.setText("  o  ");
+  c1 = 10;}
+
+
+if (rand >=0.3 && rand <=0.6){
+button3.setEnabled(false);
+button3.setText("  o  ");
+  c3= 10;}
+
+
+if (rand >0.6&&rand <=0.93){
+button7.setEnabled(false);
+button7.setText("  o  ");
+  c7= 10;}
+
+
+if (rand >0.93){
+button9.setEnabled(false);
+button9.setText("  o  ");
+  c9= 10;}
+}
+
+else{
+if (c5==0&&fw==0){
+
+button5.setEnabled(false);
+button5.setText("  o  ");
+  c5 = 10;}
+}//after first wave analyt
+//count pl
+int d =1;
+
+if (c1+c2+c3==d*3 ||c4+c5+c6==d*3||c7+c8+c9==d*3
+||c1+c4+c7==d*3||c2+c5+c8==d*3||c3+c6+c9==d*3
+||c1+c5+c9==d*3||c3+c5+c7==d*3)
+win();
+
+
+ ArrayList<Integer> list = new ArrayList<>();
+int line1 = c1+c2+c3;
+ list.add(line1);
+int line2 = c4+c5+c6;
+ list.add(line2);
+int line3 = c7+c8+c9;
+ list.add(line3);
+int line4 = c1+c4+c7;
+ list.add(line4);
+int line5 = c2+c5+c8;
+ list.add(line5);
+int line6 = c3+c6+c9;
+ list.add(line6);
+int line7 = c1+c5+c9;
+ list.add(line7);
+int line8 = c3+c5+c7;
+ list.add(line8);
+
+int max = 777;
+int m1 = 777;
+int m2 = 777;
+int m3 = 777;
+for (int i = 0; i <list.size(); i++)
+  { 
+if (list.get(i) ==20){
+max = i;
+m1 = i;
+}
+}
+
+if (m1<700&&fw!=0){
+max++;
+
+if (max ==1 && c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); max = 777;
+  c1 = 10;}
+if (max ==1 && c2==0){
+button2.setEnabled(false);
+button2.setText("  o  "); max = 777;
+  c2 = 10;}
+if (max ==1 && c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); max = 777;
+  c3 = 10;}
+
+if (max == 2&& c4==0){
+button4.setEnabled(false);
+button4.setText("  o  "); max = 777;
+  c4 = 10;}
+if (max ==2 && c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max == 2&& c6==0){
+button6.setEnabled(false);
+button6.setText("  o  "); max = 777;
+  c6 = 10;}
+
+if (max ==3 && c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); max = 777;
+  c7 = 10;}
+if (max ==3 && c8==0){
+button8.setEnabled(false);
+button8.setText("  o  "); max = 777;
+  c8 = 10;}
+if (max ==3 && c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); max = 777;
+  c9 = 10;}
+
+if (max == 4&& c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); max = 777;
+  c1 = 10;}
+if (max == 4&& c4==0){
+button4.setEnabled(false);
+button4.setText("  o  "); max = 777;
+  c4 = 10;}
+if (max == 4&& c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); max = 777;
+  c7 = 10;}
+
+if (max == 5&& c2==0){
+button2.setEnabled(false);
+button2.setText("  o  "); max = 777;
+  c2 = 10;}
+if (max ==5 && c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max ==5 && c8==0){
+button8.setEnabled(false);
+button8.setText("  o  "); max = 777;
+  c8 = 10;}
+
+if (max ==6 && c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); max = 777;
+  c3 = 10;}
+if (max == 6&& c6==0){
+button6.setEnabled(false);
+button6.setText("  o  "); max = 777;
+  c6 = 10;}
+if (max == 6&& c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); max = 777;
+  c9 = 10;}
+
+if (max ==7 && c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); max = 777;
+  c1 = 10;}
+if (max == 7&& c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max == 7&& c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); max = 777;
+  c9 = 10;}
+
+if (max == 8&& c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); max = 777;
+  c3 = 10;}
+if (max == 8&& c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max ==8 && c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); max = 777;
+  c7 = 10;}
+}
+
+d=d*10;
+if (c1+c2+c3==d*3 ||c4+c5+c6==d*3||c7+c8+c9==d*3
+||c1+c4+c7==d*3||c2+c5+c8==d*3||c3+c6+c9==d*3
+||c1+c5+c9==d*3||c3+c5+c7==d*3)
+fail();
+
+max = 777;
+for (int i = 0; i <list.size(); i++)
+  { 
+if (list.get(i) ==2){
+max = i;
+m2= i;
+}
+}
+
+if (m2<700&&m1>700&&fw!=0){
+max++;
+
+if (max ==1 && c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); max = 777;
+  c1 = 10;}
+if (max ==1 && c2==0){
+button2.setEnabled(false);
+button2.setText("  o  "); max = 777;
+  c2 = 10;}
+if (max ==1 && c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); max = 777;
+  c3 = 10;}
+
+if (max == 2&& c4==0){
+button4.setEnabled(false);
+button4.setText("  o  "); max = 777;
+  c4 = 10;}
+if (max ==2 && c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max == 2&& c6==0){
+button6.setEnabled(false);
+button6.setText("  o  "); max = 777;
+  c6 = 10;}
+
+if (max ==3 && c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); max = 777;
+  c7 = 10;}
+if (max ==3 && c8==0){
+button8.setEnabled(false);
+button8.setText("  o  "); max = 777;
+  c8 = 10;}
+if (max ==3 && c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); max = 777;
+  c9 = 10;}
+
+if (max == 4&& c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); max = 777;
+  c1 = 10;}
+if (max == 4&& c4==0){
+button4.setEnabled(false);
+button4.setText("  o  "); max = 777;
+  c4 = 10;}
+if (max == 4&& c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); max = 777;
+  c7 = 10;}
+
+if (max == 5&& c2==0){
+button2.setEnabled(false);
+button2.setText("  o  "); max = 777;
+  c2 = 10;}
+if (max ==5 && c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max ==5 && c8==0){
+button8.setEnabled(false);
+button8.setText("  o  "); max = 777;
+  c8 = 10;}
+
+if (max ==6 && c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); max = 777;
+  c3 = 10;}
+if (max == 6&& c6==0){
+button6.setEnabled(false);
+button6.setText("  o  "); max = 777;
+  c6 = 10;}
+if (max == 6&& c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); max = 777;
+  c9 = 10;}
+
+if (max ==7 && c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); max = 777;
+  c1 = 10;}
+if (max == 7&& c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max == 7&& c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); max = 777;
+  c9 = 10;}
+
+if (max == 8&& c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); max = 777;
+  c3 = 10;}
+if (max == 8&& c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); max = 777;
+  c5 = 10;}
+if (max ==8 && c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); max = 777;
+  c7 = 10;}
+}
+
+max = 777;
+for (int i = 0; i <list.size(); i++)
+  { 
+if (list.get(i) ==10){
+max = i;
+m3=i;
+}
+}
+
+if (m3<700&m1>700&&m2>700&&fw!=0){
+max++;
+
+if (max ==1 && c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); 
+max = 777;
+  c1 = 10;}
+if (max ==1 && c2==0){
+button2.setEnabled(false);
+button2.setText("  o  "); 
+max = 777;
+  c2 = 10;}
+if (max ==1 && c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); 
+max = 777;
+  c3 = 10;}
+
+if (max == 2&& c4==0){
+button4.setEnabled(false);
+button4.setText("  o  "); 
+max = 777;
+  c4 = 10;}
+if (max ==2 && c5==0){
+button5.setEnabled(false);
+button5.setText("  o  ");
+ max = 777;
+  c5 = 10;}
+if (max == 2&& c6==0){
+button6.setEnabled(false);
+button6.setText("  o  "); 
+max = 777;
+  c6 = 10;}
+
+if (max ==3 && c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); 
+max = 777;
+  c7 = 10;}
+if (max ==3 && c8==0){
+button8.setEnabled(false);
+button8.setText("  o  ");
+ max = 777;
+  c8 = 10;}
+if (max ==3 && c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); 
+max = 777;
+  c9 = 10;}
+
+if (max == 4&& c1==0){
+button1.setEnabled(false);
+button1.setText("  o  ");
+ max = 777;
+  c1 = 10;}
+if (max == 4&& c4==0){
+button4.setEnabled(false);
+button4.setText("  o  "); 
+max = 777;
+  c4 = 10;}
+if (max == 4&& c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); 
+max = 777;
+  c7 = 10;}
+
+if (max == 5&& c2==0){
+button2.setEnabled(false);
+button2.setText("  o  "); 
+max = 777;
+  c2 = 10;}
+if (max ==5 && c5==0){
+button5.setEnabled(false);
+button5.setText("  o  ");
+ max = 777;
+  c5 = 10;}
+if (max ==5 && c8==0){
+button8.setEnabled(false);
+button8.setText("  o  "); 
+max = 777;
+  c8 = 10;}
+
+if (max ==6 && c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); 
+max = 777;
+  c3 = 10;}
+if (max == 6&& c6==0){
+button6.setEnabled(false);
+button6.setText("  o  "); 
+max = 777;
+  c6 = 10;}
+if (max == 6&& c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); 
+max = 777;
+  c9 = 10;}
+
+if (max ==7 && c1==0){
+button1.setEnabled(false);
+button1.setText("  o  "); 
+max = 777;
+  c1 = 10;}
+if (max == 7&& c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); 
+max = 777;
+  c5 = 10;}
+if (max == 7&& c9==0){
+button9.setEnabled(false);
+button9.setText("  o  "); 
+max = 777;
+  c9 = 10;}
+
+if (max == 8&& c3==0){
+button3.setEnabled(false);
+button3.setText("  o  "); 
+max = 777;
+  c3 = 10;}
+if (max == 8&& c5==0){
+button5.setEnabled(false);
+button5.setText("  o  "); 
+max = 777;
+  c5 = 10;}
+if (max ==8 && c7==0){
+button7.setEnabled(false);
+button7.setText("  o  "); 
+max = 777;
+  c7 = 10;}
+}
+
+if (fw==0){
+fw=1;}
+
+if (c1!=0 &&c2!=0 &&c3!=0 &&c4!=0 &&c5!=0 &&c6!=0 &&c7!=0 &&c8!=0 &&c9!=0 ){
+s2="Draw";
+label.setText(s2);
+jf.add(label);
+jf.setVisible(true);
+}
+
+}// analyt end
+
+public void win(){
+s2="X_win";
+end();
+}
+
+public void fail(){
+s2="X_fail";
+end();
+}
+
+public void end() {
+button1.setEnabled(false);
+button2.setEnabled(false);
+button3.setEnabled(false);
+button4.setEnabled(false);
+button5.setEnabled(false);
+button6.setEnabled(false);
+button7.setEnabled(false);
+button8.setEnabled(false);
+button9.setEnabled(false);
+
+label.setText(s2);
+jf.add(label);
+jf.setVisible(true);
+}
+
+public void actionPerformed(ActionEvent ae) {}
+
+public static void main(String args[]){
+new Solution ();
+}
+
+}
