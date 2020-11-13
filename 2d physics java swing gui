@@ -1,0 +1,445 @@
+/* 
+path c:\Program Files\Java\jdk-12.0.1\bin
+ cd c:\1
+ javac Solution.java
+java Solution  
+jar cmf manif.txt  Solution.jar *.class
+*/
+
+//   
+import java.awt.*; 
+import java.awt.event.*; 
+import javax.swing.*; 
+import java.util.*;
+ 
+public class  Solution  implements ActionListener  {
+JFrame jf;
+static  ArrayList<Integer> list = new ArrayList<>();
+static  ArrayList<Integer> list2 = new ArrayList<>();
+static  ArrayList<Integer> listu = new ArrayList<>();
+Label label;
+static int field = 225; //
+static int d= 15;
+static int zero = 0;
+static int zmax = 9;
+static  String s = "info";
+JTextField smallField;
+String line = "";
+static int brush= 0;
+
+static{
+for (int i = 0; i < field ; i++) { // start field
+list.add(2);
+}
+}
+
+Solution () //это конструктор
+{
+jf= new JFrame("Blocks_grav"); //создаем фрейм, где все будет
+jf.setResizable(false);
+jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //закр окно по крестику
+label = new Label();
+jf.add(label);
+
+
+for (int i = 0; i < field ; i++) {//
+JButton button = new JButton(String.valueOf(list.get(i))); 
+button.setName(""+i);
+jf.add(button); 
+
+if (list.get(i)>=zmax ){ 
+button.setEnabled(false);
+}
+if (list.get(i)==2)
+button.setBackground(Color.black);
+if (list.get(i)==1)
+button.setBackground(Color.gray);
+if (list.get(i)==0)
+button.setBackground(Color.blue);
+
+button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//do what we want with int in Array, assosiated with this button
+String s2 = ((JComponent) e.getSource()).getName();
+  int a = Integer.parseInt(s2);
+int b = list.get(a);
+
+if (b >=zmax ){ //check for value
+button.setEnabled(false);
+}
+else{//actual job push the button start
+
+listu.clear();
+for (int i = 0; i < field ; i++) { // copylist for undo
+listu.add(list.get(i));
+}
+
+b=brush;
+list.set(a, b);
+
+button.setText(String.valueOf(b));
+}//actual job push the button end
+//show the result in GUI
+
+label.setText(s);
+jf.add(label);
+
+jf.setVisible(true);
+an();
+} 
+ });
+}//
+
+//Menu start
+JButton  buttonz= new JButton("                                                                                                                                                                                                      "); 
+jf.add(buttonz); 
+buttonz.setEnabled(false);
+
+JButton  button1= new JButton("Undo"); 
+if (listu.size()>0){
+button1.setSelected(true);}
+jf.add(button1); 
+button1.addActionListener(this); 
+
+JButton  buttonz4= new JButton("                                    "); 
+jf.add(buttonz4); 
+buttonz4.setEnabled(false);
+
+ String emtys = "Zero";
+ String gravels= "Gravel";
+ String rocks = "Rock";
+JRadioButton emty = new JRadioButton(emtys);
+if (brush == 0){
+emty.setSelected(true);}
+JRadioButton gravel = new JRadioButton(gravels);
+if (brush  == 1){
+gravel.setSelected(true);}
+JRadioButton rock = new JRadioButton(rocks);
+if (brush == 2){
+rock.setSelected(true);}
+emty.setActionCommand(emtys);
+gravel.setActionCommand(gravels);
+rock.setActionCommand(rocks);
+ButtonGroup group = new ButtonGroup();
+  group.add(emty);
+  group.add(gravel);
+  group.add(rock);
+jf.add(emty); 
+jf.add(gravel); 
+jf.add(rock); 
+emty.addActionListener(this); 
+gravel.addActionListener(this); 
+rock.addActionListener(this); 
+
+JButton  buttonz5= new JButton("     Choose a map                                                                                                                                                                            "); 
+jf.add(buttonz5); 
+buttonz5.setEnabled(false);
+//list to choose
+JButton  ar= new JButton("ar"); 
+jf.add(ar); 
+ar.addActionListener(this); 
+
+JButton  ag= new JButton("ag"); 
+jf.add(ag); 
+ag.addActionListener(this); 
+
+JButton av  = new JButton("av"); 
+jf.add(av); 
+av.addActionListener(this); 
+
+JButton cstl  = new JButton("cstl"); 
+jf.add(cstl); 
+cstl.addActionListener(this); 
+
+JButton wall = new JButton("wall"); 
+jf.add(wall); 
+wall.addActionListener(this); 
+
+JButton cave = new JButton("cave"); 
+jf.add(cave); 
+cave.addActionListener(this); 
+
+JButton  buttonz2= new JButton("      Save and load map via line (try Ctrl+c & Ctrl+v)                                                                                                                "); 
+jf.add(buttonz2); 
+buttonz2.setEnabled(false);
+
+JButton  button2= new JButton("View_line"); 
+jf.add(button2); 
+button2.addActionListener(this); 
+
+JButton  button3= new JButton("Clear_line"); 
+jf.add(button3); 
+button3.addActionListener(this); 
+
+smallField = new JTextField(5);
+jf.add(smallField);
+
+JButton  button4= new JButton("Read_line_from_input"); 
+jf.add(button4); 
+button4.addActionListener(this); 
+
+JButton  buttonz3= new JButton("                                                                                                                                                                                                      "); 
+jf.add(buttonz3); 
+buttonz3.setEnabled(false);
+
+//Menu end
+
+jf.setLayout(new FlowLayout(FlowLayout.CENTER,0,0)); 
+jf.setSize(650,700);//размер фрейма
+
+label.setText(s);
+jf.add(label);
+
+jf.setVisible(true); //видимость
+}
+
+public void an(){ //analyze changes in Arraylist  start (physics, etc)
+list2.clear();
+for (int i = 0; i < field ; i++) { // copyfield
+list2.add(list.get(i));
+}
+
+for (int i = list.size()-1; i >=0; i--){// back array cycle start
+
+//rock start
+if (i-4*d-1>=0 ){
+int a = (int) ((i)/d);
+int b =  (int) ((i-1)/d);
+int c = (int) ((i+1)/d);
+
+if (a==b&&list.get(i-1)==0&&list.get(i-d-1)==0&& list.get(i-4*d)==2
+&&list.get(i-2*d-1)==0&&list.get(i-3*d-1)==0&&list.get(i-4*d-1)==0
+){//if left rock block is on the same row,level and has access
+list.set(i-4*d, 1);
+
+}
+
+if (a==c&&list.get(i+1)==0&&list.get(i-d+1)==0&& list.get(i-4*d)==2
+&&list.get(i-2*d+1)==0&&list.get(i-3*d+1)==0&&list.get(i-4*d+1)==0
+){//if rght rock block is on the same row,level and has access
+list.set(i-4*d, 1);
+
+}
+}
+
+if (i-d>=0&& list.get(i-d)==2&& list.get(i)==0){ //check rock if exist upper level and rock is under void start
+int stay = 0;
+int a = (int) ((i)/d);
+int b =  (int) ((i-1)/d);
+int b2 =  (int) ((i-2)/d);
+int b3 =  (int) ((i-3)/d);
+int c = (int) ((i+1)/d);
+int c2 = (int) ((i+2)/d);
+int c3 = (int) ((i+3)/d);
+
+if (a==b&& a==c&& list.get(i-d-1)==2&& list.get(i-d+1)==2&& list.get(i-1)==2 && list.get(i+1)==2){
+stay++;} //left and right closest
+
+if(i-d-2>=0){
+if (a==b2 && a==c  && list.get(i-d-2)==2&& list.get(i-d-1)==2&& list.get(i-d+1)==2
+&& list.get(i-2)==2 && list.get(i+1)==2){
+stay++;}}//duo left+1 and right+1
+
+if (a==b && a==c2  && list.get(i-d-1)==2&& list.get(i-d+1)==2&& list.get(i-d+2)==2
+&& list.get(i-1)==2 && list.get(i+2)==2){
+stay++;}//duo left+1 and right+1
+
+if(i-d-2>=0){
+if (a==b2 && a==c2  && list.get(i-d-2)==2&& list.get(i-d-1)==2&& list.get(i-d+1)==2&& list.get(i-d+2)==2
+&& list.get(i-2)==2 && list.get(i+2)==2){
+stay++;}}
+
+if(i-d-3>=0){
+if (a==b3 && a==c  && list.get(i-d-3)==2&& list.get(i-d-2)==2&& list.get(i-d-1)==2&& list.get(i-d+1)==2
+&& list.get(i-3)==2 && list.get(i+1)==2){
+stay++;}}
+
+if (a==b && a==c3  && list.get(i-d-1)==2&& list.get(i-d+1)==2&& list.get(i-d+2)==2&& list.get(i-d+3)==2
+&& list.get(i-1)==2 && list.get(i+3)==2){
+stay++;}
+
+if (stay==0){list.set(i-d,1);}
+}//check rock if exist upper level and rock is under void end
+//rock end
+
+if (i-d>=0){ //check if exist upper level start
+
+//gravel start
+if (list.get(i)==0  ){//if block is emty, gravel fall down start
+int z=i;
+while (z>-1){
+if (list.get(z)==0){
+z=z-d;
+}
+else{
+if (list.get(z)==1){
+list.set(i,1);
+list.set(z,0);
+break;
+}
+else{
+break;
+}
+}
+}
+}//if block is emty, gravel fall down end
+
+if (i-d-1>=0){
+int a = (int) ((i)/d);
+int b =  (int) ((i-1)/d);
+int c = (int) ((i+1)/d);
+
+if (a==b&&list.get(i-1)==0&&list.get(i-d-1)==0&& list.get(i-d)==1&& list.get(i)!=0){//if left gr block is on the same row,level and has access
+list.set(i-d, 0);
+list.set(i-1, 1);
+}
+
+if (i+1<=list.size()-1){
+if (a==c&&list.get(i+1)==0&&list.get(i-d+1)==0&& list.get(i-d)==1&& list.get(i)!=0){//if right gr block is on the same row,level and has access
+list.set(i-d, 0);
+list.set(i+1, 1);
+
+}
+}
+
+}//gravel end
+
+}//check if exist upper level end
+
+}// back array cycle end
+
+//analyze changes in Arraylist end
+
+an2();
+}
+
+public void an2(){
+int compare=0;
+for (int i = 0; i < field ; i++) { 
+if (list.get(i)!=list2.get(i)){
+compare++;
+break;
+}
+}
+
+if (compare!=0){
+an();
+}
+else{
+jf.getContentPane().removeAll(); //clear GUI
+jf.dispose();
+new Solution (); //GUI with new info
+}
+
+}
+
+public void actionPerformed(ActionEvent e) {
+if(e.getActionCommand().equals("Undo"))
+{
+for (int i = 0; i <list.size(); i++){
+   
+list.set(i, (listu.get(i))); 
+}
+an();
+}
+
+if(e.getActionCommand().equals("View_line"))
+{
+String line = "";
+for (int i = 0; i <list.size(); i++){
+   
+line=line + String.valueOf(list.get(i)); 
+}
+smallField.setText(line);  
+jf.setVisible(true);
+}
+
+if(e.getActionCommand().equals("Clear_line"))
+{
+smallField.setText("");  
+jf.setVisible(true);
+}
+
+if(e.getActionCommand().equals("Read_line_from_input"))
+{
+line = smallField.getText();  
+drawline();
+}
+
+if(e.getActionCommand().equals("Zero"))
+{
+brush = 0;
+}
+
+if(e.getActionCommand().equals("Gravel"))
+{
+brush = 1;
+}
+
+if(e.getActionCommand().equals("Rock"))
+{
+brush = 2;
+}
+
+if(e.getActionCommand().equals("ar"))
+{
+line = "222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222";
+drawline();
+}
+
+if(e.getActionCommand().equals("ag"))
+{
+line = "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
+drawline();
+}
+
+if(e.getActionCommand().equals("av"))
+{
+line = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+drawline();
+}
+
+if(e.getActionCommand().equals("cstl"))
+{
+line = "000000000000000000002000000000000002000000000000002000000000000002000000000000022200000000000020200000000000020200000000000020200000000020222220202020020200022222222020200020200202020200020200202111111111111111111111111111111";
+drawline();
+}
+
+if(e.getActionCommand().equals("wall"))
+{
+line = "111111112000000111111112000000111111112000000111111112000000111111111200000111111111200000111111111200000111111111200000111111111120000111111111120000111111111120000111111111120000111111111222000111111111202000111111111112000";
+drawline();
+}
+
+if(e.getActionCommand().equals("cave"))
+{
+line = "222222222222222200020002000202200020002000202200020002000202200020002000202222222222222222222000200020002222222222222222222220002000222222222222222222202000200020002202000200020002202000200020002202000200020002222222210122222";
+drawline();
+}
+
+} //action button end 
+
+public void drawline(){
+if (line.length()== field){
+
+char[] chars = line.toCharArray();
+
+for (int i = 0; i < chars.length; i++) {
+ String z =  String.valueOf(chars[i]);
+    int z2 =  Integer.parseInt(z);
+list.set(i, z2);
+}
+jf.setVisible(true);
+an();
+}
+else{
+smallField.setText("error");  
+jf.setVisible(true);
+}
+}
+
+public static void main(String args[]){
+new Solution ();
+}
+
+}
