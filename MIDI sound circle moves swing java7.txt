@@ -1,0 +1,139 @@
+/*
+path C:\Program Files (x86)\java\jdk1.7.0\bin
+cd c:\1
+javac *.java
+jar cmf manif.txt  Sol.jar *.class
+*/
+
+import javax.sound.midi.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Sol {
+ public static Timer2 tim = null;
+ public static TestThread task = null;
+ public static boolean pl = true;
+ public static Sequencer player = null;
+ public static Sequence seq = null;
+ public static Track track = null;
+ public static int r = 0;
+ public static   DrawField df = null;
+ public static  JFrame jf = null;
+ public static void main(String[] args) {
+  go();
+   task = new TestThread();
+  new Thread(task).start();
+tim = new Timer2();
+  tim.go();
+ }
+
+ public static void go (){
+  jf = null;
+ jf = new JFrame("MIDI Sound Generator Java by OlegTim. SPACE to run/stop");
+  jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+  jf.addWindowListener(new java.awt.event.WindowAdapter() {
+   @Override
+   public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+    System.exit(0);
+   }
+  });
+  jf.addKeyListener(new KeyAdapter() {
+   public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+     System.exit(0);}
+    if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+     if (pl){pl=false; } else {
+      pl=true;   tim.go();
+     }}
+   }});
+
+  df = new DrawField();
+  jf.getContentPane().add(df);
+  jf.setSize(500,300);
+  jf.setVisible(true);
+ }
+ static class DrawField extends  JPanel implements ControllerEventListener{
+  boolean msg = false;
+  public void controlChange(ShortMessage event){
+   msg=true;
+   repaint();
+  }
+
+  public void paintComponent(Graphics g){
+   if (msg){
+    g.setColor(Color.gray);
+    g.fillRect(0,0,this.getWidth(),this.getHeight());
+    g.setColor(Color.green);
+    g.fillOval(0,200-r*2,200,200);
+    msg = false;
+   }}
+ }
+
+ public static class TestThread implements Runnable{
+  public void run()
+  {
+   try {
+    player = null;
+    player = MidiSystem.getSequencer();
+    player.open();
+    player.addControllerEventListener(df, new int[]{127});
+   }catch (Exception e) {
+   }
+  }
+
+  public   void play() {
+   try {
+    seq = new Sequence(Sequence.PPQ, 4);
+    track = seq.createTrack();
+    r = (int) ((Math.random() * 100));
+    track.add(makeevent(144, 1, r, 100, 0));
+    track.add(makeevent(176, 1, 127, 0, 0));
+    track.add(makeevent(128, 1, r, 100, 0 + 2));
+    player.setSequence(seq);
+    player.setTempoInBPM(120);
+    player.start();
+    try {Thread.sleep(300);} catch (InterruptedException e) {}
+    player.stop();
+    seq = null;
+    track = null;
+   } catch (Exception e) {
+   }
+  }
+
+ }
+
+ public  static MidiEvent makeevent(int comd, int chan, int freq, int vol, int tick) {
+  MidiEvent event = null;
+  try {
+   ShortMessage a = new ShortMessage();
+   a.setMessage(comd, chan, freq, vol);
+   event = new MidiEvent(a, tick);
+  } catch (Exception e) {
+  }
+  return event;
+ }
+
+ public static class Timer2
+ {
+  public void go() {
+
+   final Timer timer = new Timer();
+   timer.schedule(new TimerTask() {
+    @Override
+    public void run() {
+     if(!pl){
+      timer.cancel();
+      return;
+     }
+     task.play();
+    }
+   }, 0, 500);
+  }
+ }
+
+}

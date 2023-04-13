@@ -1,0 +1,59 @@
+Press <1> for English.	Drucken Sie die Taste <2>, um Deutsch auszuwahlen.	Нажмите <3> для русского языка.
+Type your your favorite hero's name	Schreibe deine Lieblingsfigur	Напечатайте имя любимого героя
+and press <Enter>:	und Drucken Sie <Enter>:	и нажмите  <Enter>: 
+Type the name of hero you don't like	Geben Sie den Namen des Helden ein, den Sie nicht mogen	Напечатайте имя героя, который не нравится
+Good! Listen to my tale:	Gut! Hor dir meine Geschichte an:	Хорошо! Внимайте моей дивной истории:
+In a land far away,	In einem fernen Land,	В далёком-предалёком краю, 
+in the Cookies Valley,	in einem Kekstal,	в долине, полной печенек, 
+in the Caramel Valley,	im Karamelltal,	в карамельной долине, 
+in the Sugar Valley,	in einem Zuckertal,	в сахарной долине,
+in the gingerbread Valley,	im Lebkuchental,	в пряничной долине,
+in the chocolate Valley,	im Schokoladental,	в шоколадной долине,
+in candy Valley,	im Candy Valley,	в леденцовой долине,
+in the Valley of marshmallow,	im Tal der Eibisch,	в долине из пастилы,
+in the Valley of marshmallows,	im Marshmallow-Tal,	в долине из зефира,
+in the marzipan Valley,	im Marzipantal,	в марципановой долине,
+in cake Valley,	im Kuchental,	в пирожной долине,
+~~separ		
+there was a	gab es einen	стоял 
+wonderful	wunderschones	чудесный
+magnificent	erstaunlichen	потрясающий
+beautiful	schones	прекрасный
+magic	magische	волшебный
+remarkable	wunderbar	замечательный
+amazing	erstaunlich	удивительный
+luxurious	luxurios	роскошный
+perfect	perfekt	совершенный
+elegant	elegant	изящный
+marvelous	fabelhaft	дивный
+~~separ		
+mansion	Herrenhaus	особняк
+palace	Palast	дворец
+castle	Schloss	замок
+villa	Villa	дом
+manor	Gutshof	приют
+cottage	Hutte	коттедж
+tower	Turm	терем
+log cabin	Blockhaus	сруб
+hall	Saal	чертог
+shelter	Unterschlupf	кров
+~~separ		
+This lands belonged to	Dies war die Domanen von	Имя владельца этих мест было 
+Once, in the gloomy weather, the villain came.	Eines Tages runzelte der Himmel die Stirn und ein Bosewicht erschien.	Однажды небо нахмурилось и явилось зло.
+The villain's mouth claimed: 'Ha-ha, I am	Sein Mund sagte: 'Ha ha, ich bin	Злые уста произнесли: 'Ха-ха, я - 
+I will do some ungood!'	Ich werde verwohnen!'	Я буду творить что-то нехорошее!'
+~~separ		
+grabbed foe's nose	nahm ihn an der Nase	хвать злюку за нос
+grabbed foe's butt	packte ihn beim Arsch	хвать злюку за попу 
+grabbed foe's ear	nahm ihn am Ohr	хвать злюку за ухо 
+grabbed foe's finger	packte den Finger des Feindes	хвать злюку за палец 
+grabbed foe's trunk	packte den Russel des Feindes	хвать злюку за хобот 
+grabbed foe's feet	packte die Fusse des Feindes	хвать злюку за ступню 
+grabbed foe's hand	griff nach der Hand des Feindes	хвать злюку за руку 
+grabbed foe's leg	packte das Bein des Feindes	хвать злюку за ногу 
+grabbed foe's hair	packte die Haare des Feindes	хвать злюку за волосы 
+grabbed foe's back	packte den Rucken des Feindes	хвать злюку за спину 
+~~separ		
+and threw into trash bin.	und warf es in den Mull.	и бах! на помойку.
+And life was nice and charming again.	Und das Leben wurde wieder schon und angenehm.	И жизнь снова стала прекрасна и приятна.
+Press any key for new story	Drucken Sie eine beliebige Taste fur eine neue Geschichte	Нажмите любую клавишу для новой истории

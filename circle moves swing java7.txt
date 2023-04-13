@@ -1,0 +1,104 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Main{
+public static    JPanel panel;
+public static    JFrame frame;
+    public static    int count=1;
+    public static    int x=0;
+    public static    int x2=0;
+    public static    int tic = 0;
+    public static void main(String[] args) {
+        Sol sol = new Sol();
+        Timer2 timer = new Timer2();
+        timer.go();
+
+    }
+
+   static class Sol{
+        Sol(){
+
+             frame = new JFrame("Two-part move Java Swing by OlegTim. SPACE to pause");
+
+            frame.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+                        System.exit(0);
+                    }
+                    if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+                        if (count >0){count=0;}else{
+                            count=1;
+                            Timer2 timer = new Timer2();
+                            timer.go();
+                        }
+                    }
+                    }});
+
+            frame.setLayout(new BorderLayout());
+            frame.setSize(610, 450);
+            frame.setLocationRelativeTo(null);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+        }
+   }
+
+    public  static class Solar extends JPanel {
+        @Override
+        public void paintComponent(Graphics g) {
+           // super.paintComponent(g);
+                    super.paintComponent(g);
+                    Graphics2D g2 = (Graphics2D) g;
+
+                    g2.setColor(new Color(255, 0, 0));
+                    Graphics2D g2d = (Graphics2D) g;
+                    Area a = new Area(new Ellipse2D.Double(x, 0, 200, 200));
+                    a.subtract(new Area(new Rectangle2D.Double(200,0,200,200)));
+                    g2d.fill(a);
+
+            g2.setColor(new Color(0, 255, 0));
+            Area a2 = new Area(new Ellipse2D.Double(x2, 0, 200, 200));
+            a2.subtract(new Area(new Rectangle2D.Double(0,0,200,200)));
+            g2d.fill(a2);
+            };
+
+        }
+
+
+   public static void redraw(){
+        if (tic==0){ x2++;  x++;}
+       if (tic!=0){ x2--;  x--;}
+       if (x>200){tic=1;}
+       if (x<0){tic=0;}
+
+      Solar solar = new Solar();
+       frame.add(solar);
+       frame.revalidate();
+   }
+
+    public static class Timer2
+    {
+        public void go() {
+
+            final Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if(count<1){
+                        timer.cancel();
+                        return;
+                    }
+                    redraw();
+                   // System.out.println("tic");
+                }
+            }, 0, 20);
+        }
+    }
+
+}
